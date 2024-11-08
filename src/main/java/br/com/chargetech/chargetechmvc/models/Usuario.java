@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "CT_USUARIO")
@@ -34,5 +35,13 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "ID_GENERO", nullable = false)
     private Genero genero;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "CT_ROLE_USUARIO",
+            joinColumns = @JoinColumn(name = "ID_USUARIO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ROLE")
+    )
+    private Set<Role> roles;
 
 }
