@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Log-in</title>
+</head>
+<body>
+
+<div class="d-flex justify-content-center align-items-center flex-column min-vh-100 max-vw-100">
+
+    <h1 class="mb-3">Log-in</h1>
+
+    <form class="d-flex justify-content-center align-items-center flex-column w-80" th:action="@{/login}" method="post">
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Entrar</button>
+        <p class="mt-5">Não possui cadastro? <a href="/usuario/cadastrar">Clique aqui!</a></p>
+    </form>
+
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</body>
+</html>
