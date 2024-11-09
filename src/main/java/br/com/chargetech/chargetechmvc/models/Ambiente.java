@@ -19,8 +19,11 @@ public class Ambiente {
     @Column(name = "ID_AMBIENTE")
     private Long id;
 
-    @Column(name = "NM_AMBIENTE", length = 100, nullable = false)
+    @Column(name = "NM_AMBIENTE", length = 100, nullable = false, unique = true)
     private String nome;
+
+    @Column(name = "DS_LABEL", length = 100, nullable = false)
+    private String label;
 
     @Column(name = "DS_AMBIENTE", length = 250, nullable = false)
     private String descricao;
