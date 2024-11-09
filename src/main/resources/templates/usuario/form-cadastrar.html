@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuários</title>
+</head>
+<body class="d-flex justify-content-center align-items-center">
+
+<div class="d-flex justify-content-center align-items-center flex-column h-100 w-50">
+
+    <h1 class="mt-3 mb-5">Cadastre-se</h1>
+
+    <form class="w-100" th:action="@{/usuario/cadastrar}" th:object="${usuario}" method="post">
+
+        <div class="form-group">
+            <label class="form-label" for="nome">Nome Completo</label>
+            <input type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Informe seu nome...">
+            <p th:if="${#fields.hasErrors('nome')}" class="text text-danger" th:errors="*{nome}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Data de Nascimento</label>
+            <input class="form-control" type="date" th:field="*{dataDeNascimento}" id="dataDeNascimento" placeholder="Informe sua data de nascimento..."/>
+            <p th:if="${#fields.hasErrors('dataDeNascimento')}" class="text text-danger" th:errors="*{dataDeNascimento}"></p>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Informe seu email...">
+            <p th:if="${#fields.hasErrors('email')}" class="text text-danger" th:errors="*{email}"></p>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="senha">Senha</label>
+            <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="Informe uma senha...">
+            <p th:if="${#fields.hasErrors('senha')}" class="text text-danger" th:errors="*{senha}"></p>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Gênero</label><br>
+            <div th:each="genero : ${generos}">
+                <input type="radio" th:field="*{genero}" th:value="${genero.nome}">
+                <label th:text="${genero.label}"></label><br>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Roles</label><br>
+            <div th:each="role : ${roles}">
+                <input type="checkbox" th:field="*{roles}" th:value="${role.nome}">
+                <label th:text="${role.label}"></label><br>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Cadastrar</button>
+
+        <p class="mt-5">Já possui cadastro? <a href="/login">Clique aqui!</a></p>
+    </form>
+
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</body>
+</html>

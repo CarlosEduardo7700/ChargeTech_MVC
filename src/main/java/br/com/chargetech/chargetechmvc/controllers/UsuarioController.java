@@ -22,7 +22,7 @@ public class UsuarioController {
     @GetMapping("cadastrar")
     public String exibirCadastroDeUsuario(CadastroDeUsuarioDto dto, Model model) {
         model.addAttribute("usuario", dto);
-        model.addAttribute("generos", generoRepository);
+        model.addAttribute("generos", generoRepository.findAll());
         model.addAttribute("roles", roleRepository.findAll());
         return "usuario/form-cadastrar";
     }
