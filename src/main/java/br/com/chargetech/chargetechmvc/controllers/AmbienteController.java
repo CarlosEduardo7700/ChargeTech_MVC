@@ -36,9 +36,9 @@ public class AmbienteController {
         }
 
         Ambiente ambiente = new Ambiente();
-        ambiente.setNome(dto.nome());
+        ambiente.setNome(dto.nome().toUpperCase());
         ambiente.setDescricao(dto.descricao());
-        ambiente.setLabel(dto.nome().toUpperCase());
+        ambiente.setLabel(dto.nome());
 
         ambienteRepository.save(ambiente);
         return "redirect:/ambiente/cadastrar";
