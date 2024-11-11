@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +24,7 @@ public class Usuario {
     @Column(name = "NM_USUARIO", length = 200, nullable = false)
     private String nome;
 
-    @Column(name = "DS_EMAIL", length = 200, nullable = false)
+    @Column(name = "DS_EMAIL", length = 200, nullable = false, unique = true)
     private String email;
 
     @Column(name = "DS_SENHA", nullable = false)
@@ -43,5 +44,8 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "ID_ROLE")
     )
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Dispositivo> dispositivos;
 
 }

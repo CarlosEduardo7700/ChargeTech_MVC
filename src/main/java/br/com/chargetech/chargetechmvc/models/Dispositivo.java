@@ -36,12 +36,15 @@ public class Dispositivo {
     @OneToMany(mappedBy = "dispositivo", cascade = CascadeType.ALL)
     private List<ConsumoEnergetico> consumosEnergeticos;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "CT_DISPOSITIVOS_USUARIO",
-            joinColumns = @JoinColumn(name = "ID_DISPOSITIVO"),
-            inverseJoinColumns = @JoinColumn(name = "ID_USUARIO")
-    )
-    private List<Usuario> usuarios;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "CT_DISPOSITIVOS_USUARIO",
+//            joinColumns = @JoinColumn(name = "ID_DISPOSITIVO"),
+//            inverseJoinColumns = @JoinColumn(name = "ID_USUARIO")
+//    )
+
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", nullable = false)
+    private Usuario usuario;
 
 }
