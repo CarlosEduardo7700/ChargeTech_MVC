@@ -2,6 +2,7 @@ package br.com.chargetech.chargetechmvc.controllers;
 
 import br.com.chargetech.chargetechmvc.dtos.ambiente.CadastroDeAmbienteDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.CadastroDeDispositivoDto;
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.ListagemDosDispositivosDto;
 import br.com.chargetech.chargetechmvc.models.Ambiente;
 import br.com.chargetech.chargetechmvc.models.Dispositivo;
 import br.com.chargetech.chargetechmvc.repositories.AmbienteRepository;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("dispositivo")
@@ -32,6 +34,14 @@ public class DispositivoController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @GetMapping
+    public String exibirDispositivos(Model model) {
+        List<ListagemDosDispositivosDto> dispositivos = dispositivoRepository.findAll()
+                .stream().map(ListagemDosDispositivosDto::new).toList();
+        model.addAttribute("dispositivos", dispositivos);
+        return "dispositivo/list-dispositivos";
+    }
 
     @GetMapping("cadastrar")
     public String exibirFormularioCadastrar(CadastroDeDispositivoDto dto, Model model) {
