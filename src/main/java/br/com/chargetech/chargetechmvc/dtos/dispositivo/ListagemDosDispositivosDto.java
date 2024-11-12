@@ -5,6 +5,7 @@ import br.com.chargetech.chargetechmvc.models.Dispositivo;
 import java.math.BigDecimal;
 
 public record ListagemDosDispositivosDto(
+        Long id,
         String nome,
         BigDecimal consumoMedio,
         String status,
@@ -12,6 +13,7 @@ public record ListagemDosDispositivosDto(
 ) {
     public ListagemDosDispositivosDto(Dispositivo dispositivo) {
         this (
+                dispositivo.getId(),
                 dispositivo.getNome(),
                 dispositivo.getConsumoMedio(),
                 dispositivo.getStatus(),

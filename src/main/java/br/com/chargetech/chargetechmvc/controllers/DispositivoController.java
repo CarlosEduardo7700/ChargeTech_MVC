@@ -8,6 +8,7 @@ import br.com.chargetech.chargetechmvc.models.Dispositivo;
 import br.com.chargetech.chargetechmvc.repositories.AmbienteRepository;
 import br.com.chargetech.chargetechmvc.repositories.DispositivoRepository;
 import br.com.chargetech.chargetechmvc.repositories.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,7 @@ public class DispositivoController {
         List<ListagemDosDispositivosDto> dispositivos = dispositivoRepository.findAll()
                 .stream().map(ListagemDosDispositivosDto::new).toList();
         model.addAttribute("dispositivos", dispositivos);
+        System.out.println(dispositivos);
         return "dispositivo/list-dispositivos";
     }
 
@@ -67,6 +69,14 @@ public class DispositivoController {
         dispositivoRepository.save(dispositivo);
         redirectAttributes.addFlashAttribute("mensagem", "Dispositivo cadastrado!");
         return "redirect:/dispositivo/cadastrar";
+    }
+
+    @PostMapping("deletar")
+    @Transactional
+    public String deletarDispositivo(Long id, RedirectAttributes redirectAttributes) {
+        dispositivoRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("mensagem", "Dispositivo Deletado!");
+        return "redirect:/dispositivo";
     }
 
 }
