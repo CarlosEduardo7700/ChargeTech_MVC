@@ -29,6 +29,10 @@
             <td th:text="${disp.ambiente}"></td>
             <td th:text="${disp.status}"></td>
             <th>
+                <a th:href="@{/dispositivo/editar/}+${disp.id}"
+                   class="btn btn-primary">Editar</a>
+            </th>
+            <th>
                 <button th:onclick="|dispositivoId.value = ${disp.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     Deletar
                 </button>

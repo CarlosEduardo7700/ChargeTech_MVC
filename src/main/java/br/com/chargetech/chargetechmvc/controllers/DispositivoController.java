@@ -2,6 +2,7 @@ package br.com.chargetech.chargetechmvc.controllers;
 
 import br.com.chargetech.chargetechmvc.dtos.ambiente.CadastroDeAmbienteDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.CadastroDeDispositivoDto;
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.DispositivoDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.ListagemDosDispositivosDto;
 import br.com.chargetech.chargetechmvc.models.Ambiente;
 import br.com.chargetech.chargetechmvc.models.Dispositivo;
@@ -14,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
@@ -77,6 +75,14 @@ public class DispositivoController {
         dispositivoRepository.deleteById(id);
         redirectAttributes.addFlashAttribute("mensagem", "Dispositivo Deletado!");
         return "redirect:/dispositivo";
+    }
+
+    @GetMapping("editar/{id}")
+    public String exibirFormularioEditar(@PathVariable("id") Long id, Model model) {
+        DispositivoDto dto = new DispositivoDto(dispositivoRepository.getReferenceById(id));
+        model.addAttribute("ambientes", ambienteRepository.findAll());
+        model.addAttribute("dispositivo", dto);
+        return "dispositivo/form-editar";
     }
 
 }
