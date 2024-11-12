@@ -1,6 +1,8 @@
 package br.com.chargetech.chargetechmvc.models;
 
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.EdicaoDoDispositivoDto;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,4 +42,12 @@ public class Dispositivo {
     @JoinColumn(name = "ID_USUARIO", nullable = false)
     private Usuario usuario;
 
+    public Dispositivo(EdicaoDoDispositivoDto dto, Ambiente ambiente, Usuario usuario) {
+        this.id = dto.id();
+        this.nome = dto.nome();
+        this.consumoMedio = dto.consumoMedio();
+        this.status = dto.status();
+        this.ambiente = ambiente;
+        this.usuario = usuario;
+    }
 }

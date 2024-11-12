@@ -3,6 +3,7 @@ package br.com.chargetech.chargetechmvc.controllers;
 import br.com.chargetech.chargetechmvc.dtos.ambiente.CadastroDeAmbienteDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.CadastroDeDispositivoDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.DispositivoDto;
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.EdicaoDoDispositivoDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.ListagemDosDispositivosDto;
 import br.com.chargetech.chargetechmvc.models.Ambiente;
 import br.com.chargetech.chargetechmvc.models.Dispositivo;
@@ -39,7 +40,6 @@ public class DispositivoController {
         List<ListagemDosDispositivosDto> dispositivos = dispositivoRepository.findAll()
                 .stream().map(ListagemDosDispositivosDto::new).toList();
         model.addAttribute("dispositivos", dispositivos);
-        System.out.println(dispositivos);
         return "dispositivo/list-dispositivos";
     }
 
@@ -83,6 +83,19 @@ public class DispositivoController {
         model.addAttribute("ambientes", ambienteRepository.findAll());
         model.addAttribute("dispositivo", dto);
         return "dispositivo/form-editar";
+    }
+
+    @PostMapping("editar")
+    public String editarDispositivo(@Valid @ModelAttribute("dispositivo") EdicaoDoDispositivoDto dto, BindingResult result, RedirectAttributes redirectAttributes, Model model, Principal principal){
+        if (result.hasErrors()) {
+            model.addAttribute("ambientes", ambienteRepository.findAll());
+            return "dispositivo/form-editar";
+        }
+        Dispositivo dispositivo = new Dispositivo(dto, ambienteRepository.findByNome(dto.ambiente()), usuarioRepository.findByEmail(principal.getName()));
+
+        dispositivoRepository.save(dispositivo);
+        redirectAttributes.addFlashAttribute("mensagem", "O dispositivo foi atualizado!");
+        return "redirect:/dispositivo";
     }
 
 }
