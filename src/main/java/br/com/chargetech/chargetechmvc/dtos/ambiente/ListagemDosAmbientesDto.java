@@ -10,11 +10,13 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 public class ListagemDosAmbientesDto {
 
+    private Long id;
     private String label;
     private String descricao;
 
 
     public ListagemDosAmbientesDto(Ambiente ambiente) {
+        this.id = ambiente.getId();
         this.label = ambiente.getLabel();
         this.descricao = ambiente.getDescricao();
     }
