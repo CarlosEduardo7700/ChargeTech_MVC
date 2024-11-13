@@ -1,6 +1,7 @@
 package br.com.chargetech.chargetechmvc.controllers;
 
 import br.com.chargetech.chargetechmvc.dtos.ambiente.CadastroDeAmbienteDto;
+import br.com.chargetech.chargetechmvc.dtos.ambiente.ListagemDosAmbientesDto;
 import br.com.chargetech.chargetechmvc.dtos.usuario.CadastroDeUsuarioDto;
 import br.com.chargetech.chargetechmvc.models.Ambiente;
 import br.com.chargetech.chargetechmvc.repositories.AmbienteRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -24,8 +26,11 @@ public class AmbienteController {
     private AmbienteRepository ambienteRepository;
 
     @GetMapping("cadastrar")
-    public String exibirCadastroDeAmbiente(CadastroDeAmbienteDto dto, Model model) {
-        model.addAttribute("ambiente", dto);
+    public String exibirCadastroDeAmbiente(CadastroDeAmbienteDto dtoDeCadastro, ListagemDosAmbientesDto dtoDeListagem, Model model) {
+        model.addAttribute("ambiente", dtoDeCadastro);
+        List<ListagemDosAmbientesDto> ambientes = ambienteRepository.findAll()
+                .stream().map(ListagemDosAmbientesDto::new).toList();
+        model.addAttribute("ambientes", ambientes);
         return "ambiente/form-cadastrar";
     }
 

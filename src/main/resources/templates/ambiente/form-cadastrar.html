@@ -31,6 +31,19 @@
             <button type="submit" class="btn btn-success mt-3">Cadastrar</button>
 
         </form>
+
+        <table class="table mt-5">
+
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+            <tr th:each="amb:${ambientes}">
+                <td th:text="${amb.label}"></td>
+                <td th:text="${amb.descricao}"></td>
+            </tr>
+
+        </table>
     </div>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
