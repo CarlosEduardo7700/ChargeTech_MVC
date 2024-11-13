@@ -37,7 +37,7 @@ public class AmbienteController {
     }
 
     @PostMapping("cadastrar")
-    public String cadastrarAmbiente(@Valid @ModelAttribute("ambiente") CadastroDeAmbienteDto dto, BindingResult result, Model model) {
+    public String cadastrarAmbiente(@Valid @ModelAttribute("ambiente") CadastroDeAmbienteDto dto, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "ambiente/form-cadastrar";
         }
@@ -48,6 +48,7 @@ public class AmbienteController {
         ambiente.setLabel(dto.nome());
 
         ambienteRepository.save(ambiente);
+        redirectAttributes.addFlashAttribute("mensagem", "Ambiente Cadastrado!");
         return "redirect:/ambiente/cadastrar";
     }
 

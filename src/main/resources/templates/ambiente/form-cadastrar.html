@@ -32,6 +32,9 @@
 
         </form>
 
+        <div class="alert alert-warning mt-3" th:if="!${#strings.isEmpty(mensagem)}" th:text="${mensagem}">
+        </div>
+
         <table class="table mt-5">
 
             <tr>
