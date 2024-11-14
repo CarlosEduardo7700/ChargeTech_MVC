@@ -46,6 +46,10 @@
                 <td th:text="${amb.label}"></td>
                 <td th:text="${amb.descricao}"></td>
                 <th>
+                    <a th:href="@{/ambiente/editar/}+${amb.id}"
+                       class="btn btn-primary">Editar</a>
+                </th>
+                <th>
                     <button th:onclick="|ambienteId.value = ${amb.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                         Deletar
                     </button>

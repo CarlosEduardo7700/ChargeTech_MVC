@@ -2,6 +2,7 @@ package br.com.chargetech.chargetechmvc.controllers;
 
 import br.com.chargetech.chargetechmvc.dtos.ambiente.CadastroDeAmbienteDto;
 import br.com.chargetech.chargetechmvc.dtos.ambiente.ListagemDosAmbientesDto;
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.DispositivoDto;
 import br.com.chargetech.chargetechmvc.dtos.usuario.CadastroDeUsuarioDto;
 import br.com.chargetech.chargetechmvc.models.Ambiente;
 import br.com.chargetech.chargetechmvc.repositories.AmbienteRepository;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -58,5 +56,12 @@ public class AmbienteController {
         ambienteRepository.deleteById(id);
         redirectAttributes.addFlashAttribute("mensagem", "Ambiente Deletado!");
         return "redirect:/ambiente/cadastrar";
+    }
+
+    @GetMapping("editar/{id}")
+    public String exibirFormularioEditar(@PathVariable("id") Long id, Model model) {
+        Ambiente ambiente = ambienteRepository.getReferenceById(id);
+        model.addAttribute("ambiente", ambiente);
+        return "ambiente/form-editar";
     }
 }
