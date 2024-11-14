@@ -1,6 +1,8 @@
 package br.com.chargetech.chargetechmvc.controllers;
 
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.DispositivoDto;
 import br.com.chargetech.chargetechmvc.dtos.usuario.CadastroDeUsuarioDto;
+import br.com.chargetech.chargetechmvc.dtos.usuario.EdicaoDoUsuarioDto;
 import br.com.chargetech.chargetechmvc.repositories.GeneroRepository;
 import br.com.chargetech.chargetechmvc.repositories.RoleRepository;
 import br.com.chargetech.chargetechmvc.repositories.UsuarioRepository;
@@ -11,10 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("usuario")
@@ -22,6 +21,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -49,6 +51,14 @@ public class UsuarioController {
         }
         usuarioService.saveUser(dto, passwordEncoder);
         return "redirect:/login";
+    }
+
+    @GetMapping("editar/{id}")
+    public String exibirFormularioEditar(@PathVariable("id") Long id, Model model) {
+        EdicaoDoUsuarioDto dto = new EdicaoDoUsuarioDto(usuarioRepository.getReferenceById(id));
+        model.addAttribute("usuario", dto);
+        model.addAttribute("generos", generoRepository.findAll());
+        return "usuario/form-editar";
     }
 
 }

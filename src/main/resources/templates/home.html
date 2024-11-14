@@ -44,6 +44,11 @@
             <p sec:authorize="hasRole('USER')">Usuário</p>
         </div>
 
+        <th>
+            <a th:href="@{/usuario/editar/}+*{id}"
+               class="btn btn-primary">Editar</a>
+        </th>
+
     </div>
 
 
