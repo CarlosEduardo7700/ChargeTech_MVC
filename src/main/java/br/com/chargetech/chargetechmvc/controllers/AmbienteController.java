@@ -3,8 +3,10 @@ package br.com.chargetech.chargetechmvc.controllers;
 import br.com.chargetech.chargetechmvc.dtos.ambiente.CadastroDeAmbienteDto;
 import br.com.chargetech.chargetechmvc.dtos.ambiente.ListagemDosAmbientesDto;
 import br.com.chargetech.chargetechmvc.dtos.dispositivo.DispositivoDto;
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.EdicaoDoDispositivoDto;
 import br.com.chargetech.chargetechmvc.dtos.usuario.CadastroDeUsuarioDto;
 import br.com.chargetech.chargetechmvc.models.Ambiente;
+import br.com.chargetech.chargetechmvc.models.Dispositivo;
 import br.com.chargetech.chargetechmvc.repositories.AmbienteRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Random;
 
@@ -63,5 +66,16 @@ public class AmbienteController {
         Ambiente ambiente = ambienteRepository.getReferenceById(id);
         model.addAttribute("ambiente", ambiente);
         return "ambiente/form-editar";
+    }
+
+    @PostMapping("editar")
+    public String editarAmbiente(@Valid @ModelAttribute("ambiente") Ambiente ambiente, BindingResult result, RedirectAttributes redirectAttributes, Model model, Principal principal){
+        if (result.hasErrors()) {
+            return "ambiente/form-editar";
+        }
+
+        ambienteRepository.save(ambiente);
+        redirectAttributes.addFlashAttribute("mensagem", "O ambiente foi atualizado!");
+        return "redirect:/ambiente/cadastrar";
     }
 }

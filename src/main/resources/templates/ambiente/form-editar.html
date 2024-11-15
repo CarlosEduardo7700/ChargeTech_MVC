@@ -13,9 +13,10 @@
 
   <h1 class="mt-3 mb-5">Formulário de Edição do Ambiente</h1>
 
-  <form th:action="@{/ambiente/cadastrar}" th:object="${ambiente}" method="post">
+  <form th:action="@{/ambiente/editar}" th:object="${ambiente}" method="post">
 
     <input th:field="*{id}" type="hidden">
+    <input th:field="*{nome}" type="hidden">
 
     <div class="form-group">
       <label class="form-label" for="label">Nome</label>
