@@ -15,6 +15,10 @@
 
   <form th:action="@{/usuario/editar}" th:object="${usuario}" method="post">
 
+    <input th:field="*{id}" type="hidden">
+    <input th:field="*{senha}" type="hidden">
+    <input th:field="*{roles}" type="hidden">
+
     <div class="form-group">
       <label class="form-label">Nome Completo</label>
       <input class="form-control" type="text" th:field="*{nome}" id="nome" placeholder="Informe o novo nome do dispositivo..."/>
@@ -29,7 +33,7 @@
 
     <div class="form-group">
       <label class="form-label">Data de Nascimento</label>
-      <input class="form-control" type="date" th:field="*{dataDeNascimento}" id="dataDeNascimento" placeholder="Informe sua data de nascimento..."/>
+      <input class="form-control" type="text" th:field="*{dataDeNascimento}" id="dataDeNascimento" placeholder="Informe sua data de nascimento..."/>
       <p th:if="${#fields.hasErrors('dataDeNascimento')}" class="text text-danger" th:errors="*{dataDeNascimento}"></p>
     </div>
 

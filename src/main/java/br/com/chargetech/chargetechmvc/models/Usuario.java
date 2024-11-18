@@ -1,6 +1,9 @@
 package br.com.chargetech.chargetechmvc.models;
 
+import br.com.chargetech.chargetechmvc.dtos.usuario.EdicaoDoUsuarioDto;
+import br.com.chargetech.chargetechmvc.repositories.GeneroRepository;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,4 +51,25 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Dispositivo> dispositivos;
 
+    public Usuario(EdicaoDoUsuarioDto usuario, Genero genero) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.senha = usuario.getSenha();
+        this.genero = genero;
+        this.dataDeNascimento = usuario.getDataDeNascimento();
+        this.roles = usuario.getRoles();
+    }
+
+    public void editarDados(EdicaoDoUsuarioDto dto, Genero genero) {
+
+        if (dto.getNome() != null)
+            this.nome = dto.getNome();
+        if (dto.getEmail() != null)
+            this.email = dto.getEmail();
+        if (dto.getGenero() != null)
+            this.genero = genero;
+        if (dto.getDataDeNascimento() != null)
+            this.dataDeNascimento = dto.getDataDeNascimento();
+    }
 }
