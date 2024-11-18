@@ -26,7 +26,7 @@ class DispositivoControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Deve retornar bad request")
+    @DisplayName("O formulário de cadastro de dispositivos deveria retornar o código http 400 (Bad Request) ao receber uma requisição POST com o 'nome' vazio")
     void cadastrarDispositivo() throws Exception {
         mockMvc.perform(post("/dispositivo/cadastrar")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -40,14 +40,14 @@ class DispositivoControllerTest {
     }
 
     @Test
-    @DisplayName("Deveria retornar o código http 200 (OK) ao receber uma requisição GET")
+    @DisplayName("A lista de dispositivos deveria retornar o código http 200 (OK) ao receber uma requisição GET")
     void exibirDispositivos() throws Exception {
         mockMvc.perform(get("/dispositivo"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("Deveria retornar o código http 200 (OK) ao receber uma requisição GET")
+    @DisplayName("O formulário de cadastro de dispositivos deveria retornar o código http 200 (OK) ao receber uma requisição GET")
     void exibirFormularioCadastrar() throws Exception {
         mockMvc.perform(get("/dispositivo/cadastrar"))
                 .andExpect(status().isOk());

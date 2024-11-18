@@ -19,7 +19,7 @@ class UsuarioControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Deveria retornar o código http 200 (OK) ao receber uma requisição GET")
+    @DisplayName("O formulário de cadastro de usuários deveria retornar o código http 200 (OK) ao receber uma requisição GET")
     void exibirCadastroDeUsuario() throws Exception {
         mockMvc.perform(get("/usuario/cadastrar"))
                 .andExpect(status().isOk());

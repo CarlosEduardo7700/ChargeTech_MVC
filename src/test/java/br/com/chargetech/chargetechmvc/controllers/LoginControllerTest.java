@@ -19,7 +19,7 @@ class LoginControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Deveria retornar o código http 200 (OK) ao receber uma requisição GET")
+    @DisplayName("O formulário de login deveria retornar o código http 200 (OK) ao receber uma requisição GET")
     void login() throws Exception {
         mockMvc.perform(get("/login"))
                 .andExpect(status().isOk());

@@ -18,7 +18,7 @@ public class AmbienteControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Deveria retornar o código http 200 (OK) ao receber uma requisição GET")
+    @DisplayName("O formulário de cadastro de ambientes deveria retornar o código http 200 (OK) ao receber uma requisição GET")
     void exibirCadastroAmbiente() throws Exception {
         mockMvc.perform(get("/ambiente/cadastrar"))
                 .andExpect(status().isOk());
