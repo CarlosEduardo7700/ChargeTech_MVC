@@ -14,9 +14,6 @@
 
     <h1 class="mt-3 mb-5">Log de Consumos Energéticos</h1>
 
-<!--    <div class="alert alert-warning mt-3" th:if="!${#strings.isEmpty(mensagem)}" th:text="${mensagem}">-->
-<!--    </div>-->
-
     <table class="table">
 
         <tr>
@@ -27,7 +24,7 @@
         <tr th:each="consEnerg:${consumosEnergeticos}">
             <td th:text="${consEnerg.dataDeRegistro}"></td>
             <td th:text="${consEnerg.consumo}"></td>
-            <td th:text="${consEnerg.dispositivo}"></td>
+            <td th:text="${consEnerg.dispositivo.nome}"></td>
         </tr>
 
     </table>
