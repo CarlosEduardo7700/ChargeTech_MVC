@@ -26,12 +26,6 @@ public class ConsumoEnergetico {
     @Column(name = "VL_CONSUMO", precision = 10, scale = 2, nullable = false)
     private BigDecimal consumo;
 
-    @Column(name = "VL_CUSTO_CONSUMO", precision = 12, scale = 2, nullable = false)
-    private BigDecimal custo_consumo;
-
-    @Column(name = "VL_CUSTO_ESTIMADO", precision = 12, scale = 2, nullable = false)
-    private BigDecimal custo_estimado;
-
     @ManyToOne
     @JoinColumn(name = "ID_DISPOSITIVO", nullable = false)
     private Dispositivo dispositivo;
