@@ -23,8 +23,7 @@ public class ConsumoEnergeticoService {
 
     private Random random = new Random();
 
-    //@Scheduled(fixedRate = 1800000)
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 1800000)
     public void simularConsumoEnergetico() {
 
         dispositivoRepository.findAll().forEach(dispositivo -> {
