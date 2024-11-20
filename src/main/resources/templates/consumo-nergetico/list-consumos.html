@@ -29,6 +29,28 @@
 
     </table>
 
+    <nav class="mt-5" aria-label="Navegação das páginas">
+        <ul class="pagination flex flex-wrap justify-content-center">
+
+            <li class="page-item" th:classappend="${paginaAtual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/consumo-energetico(pagina=${paginaAtual - 1}, tamanho=${tamanhoPagina})}">
+                    Anterior
+                </a>
+            </li>
+
+            <li class="page-item">
+                <p class="page-link" th:text="${paginaAtual + 1}"></p>
+            </li>
+
+            <li class="page-item" th:classappend="${paginaAtual == totalPaginas - 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/consumo-energetico(pagina=${paginaAtual + 1}, tamanho=${tamanhoPagina})}">
+                    Próximo
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
 </div>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
