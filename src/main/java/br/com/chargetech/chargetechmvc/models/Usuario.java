@@ -1,12 +1,16 @@
 package br.com.chargetech.chargetechmvc.models;
 
+import br.com.chargetech.chargetechmvc.dtos.usuario.EdicaoDoUsuarioDto;
+import br.com.chargetech.chargetechmvc.repositories.GeneroRepository;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +27,7 @@ public class Usuario {
     @Column(name = "NM_USUARIO", length = 200, nullable = false)
     private String nome;
 
-    @Column(name = "DS_EMAIL", length = 200, nullable = false)
+    @Column(name = "DS_EMAIL", length = 200, nullable = false, unique = true)
     private String email;
 
     @Column(name = "DS_SENHA", nullable = false)
@@ -44,4 +48,28 @@ public class Usuario {
     )
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Dispositivo> dispositivos;
+
+    public Usuario(EdicaoDoUsuarioDto usuario, Genero genero) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.senha = usuario.getSenha();
+        this.genero = genero;
+        this.dataDeNascimento = usuario.getDataDeNascimento();
+        this.roles = usuario.getRoles();
+    }
+
+    public void editarDados(EdicaoDoUsuarioDto dto, Genero genero) {
+
+        if (dto.getNome() != null)
+            this.nome = dto.getNome();
+        if (dto.getEmail() != null)
+            this.email = dto.getEmail();
+        if (dto.getGenero() != null)
+            this.genero = genero;
+        if (dto.getDataDeNascimento() != null)
+            this.dataDeNascimento = dto.getDataDeNascimento();
+    }
 }

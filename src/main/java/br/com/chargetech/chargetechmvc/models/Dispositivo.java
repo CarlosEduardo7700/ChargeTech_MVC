@@ -1,6 +1,8 @@
 package br.com.chargetech.chargetechmvc.models;
 
+import br.com.chargetech.chargetechmvc.dtos.dispositivo.EdicaoDoDispositivoDto;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,12 +38,16 @@ public class Dispositivo {
     @OneToMany(mappedBy = "dispositivo", cascade = CascadeType.ALL)
     private List<ConsumoEnergetico> consumosEnergeticos;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "CT_DISPOSITIVOS_USUARIO",
-            joinColumns = @JoinColumn(name = "ID_DISPOSITIVO"),
-            inverseJoinColumns = @JoinColumn(name = "ID_USUARIO")
-    )
-    private List<Usuario> usuarios;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", nullable = false)
+    private Usuario usuario;
 
+    public Dispositivo(EdicaoDoDispositivoDto dto, Ambiente ambiente, Usuario usuario) {
+        this.id = dto.id();
+        this.nome = dto.nome();
+        this.consumoMedio = dto.consumoMedio();
+        this.status = dto.status();
+        this.ambiente = ambiente;
+        this.usuario = usuario;
+    }
 }

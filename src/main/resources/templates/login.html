@@ -10,6 +10,9 @@
 
 <div class="d-flex justify-content-center align-items-center flex-column min-vh-100 max-vw-100">
 
+    <div class="alert alert-warning mt-3" th:if="!${#strings.isEmpty(mensagem)}" th:text="${mensagem}">
+    </div>
+
     <h1 class="mb-3">Log-in</h1>
 
     <form class="d-flex justify-content-center align-items-center flex-column w-80" th:action="@{/login}" method="post">
