@@ -14,9 +14,30 @@
 
     <h1 class="mt-3 mb-5 text-center">Bem vindo ao seu Sistema de Monitoramento de Consumo de Energia da ChargeTech!</h1>
 
-    <div class="card m-2 p-3" th:object="${usuario}">
+    <h3 class="mb-4 text-muted">Seu Dashboard</h3>
 
-        <h1 class="card-title mb-4">Seus Dados</h1>
+    <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quantidade de energia consumida nesse mês</h5>
+                    <p class="display-1 text-center" th:text="${quantidadeDeEnergiaConsumidaNoMes} + ' kWh'"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quantidade de dispositivos ligados</h5>
+                    <p class="display-1 text-center" th:text="${quantidadeDeDispositivosLigados}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mb-4 mt-5 text-muted">Seus Dados</h3>
+
+    <div class="card m-2 p-3" th:object="${usuario}">
 
         <div>
             <h4 class="fw-bold">Nome</h4>
