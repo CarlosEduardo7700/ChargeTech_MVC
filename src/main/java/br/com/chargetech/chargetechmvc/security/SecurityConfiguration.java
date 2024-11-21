@@ -26,7 +26,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/login", "/webjars/**", "/css/**", "/usuario/cadastrar").permitAll()
+                        .requestMatchers("/dispositivo/cadastrar", "/dispositivo/deletar", "/ambiente/cadastrar", "/ambiente/deletar").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

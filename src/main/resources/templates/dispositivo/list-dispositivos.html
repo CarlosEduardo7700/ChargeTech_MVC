@@ -25,7 +25,7 @@
             <th>Ambiente</th>
             <th>Status</th>
             <th></th>
-            <th></th>
+            <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
         </tr>
         <tr th:each="disp:${dispositivos}">
             <td th:text="${disp.nome}"></td>
@@ -36,7 +36,7 @@
                 <a th:href="@{/dispositivo/editar/}+${disp.id}"
                    class="btn btn-primary">Editar</a>
             </th>
-            <th>
+            <th sec:authorize="hasRole('ROLE_ADMIN')">
                 <button th:onclick="|dispositivoId.value = ${disp.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     Deletar
                 </button>
